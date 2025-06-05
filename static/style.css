@@ -1,0 +1,21 @@
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-width: 300px;
+}
+
+.enter_scholarship {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  column-gap: 30px;
+  border: 10px;
+}
+
+.scholarships{
+  display:flex;
+  align-self: center;
+}
