@@ -16,7 +16,9 @@ body {
 }
 
 .scholarship_box{
-
+  display: flex;
+  flex-direction:column;
+  gap: 5px;
 }
 .scholarship_box .scholarship{
   display:flex;
@@ -26,5 +28,5 @@ body {
   margin:auto;
   padding: 10px;
   border:2px solid black;
-  width:300px;
+  width:500px;
 }
