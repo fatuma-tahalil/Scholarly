@@ -1,5 +1,7 @@
 from flask import Flask, render_template, request, redirect
 
+"""TO DO LIST"""
+# TODO: Turn tables into little div cards
 
 app = Flask(__name__)
 
