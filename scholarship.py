@@ -27,7 +27,8 @@ class Scholarships:
 @app.route("/", methods=["GET", "POST"])
 def add_scholarship():
     global scholarship_list
-    # Fecth data from sever
+    # Checks if information from the html form was sent to browser
+    # In flask this method is called post
     if request.method == "POST":
         name = str(request.form["name"])
         amount = float(request.form["amount"])

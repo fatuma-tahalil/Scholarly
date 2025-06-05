@@ -15,24 +15,16 @@
       <p><input type="submit" value="submit" /></p>
     </form>
 
-    <div class="scholarships">
-      <table border="1">
-      <!--  Basically a for loop to print scholarships in a table -->
-        <tr>
-          <th>Scholarship Name</th>
-          <th>Amount</th>
-          <th>Date Closed</th>
-        </tr>
-          {% for s in scholarships_list %}
-            <tr>
-              <td>{{ s.name }}</td>
-              <td>{{ s.amount }}</td>
-              <td>{{ s.date_closed}}</td>
-            </tr>
-          {% endfor %} <!--Loop ends-->
-
-      </table>
+    <div class="scholarship_box">
+      <!--  Basically a for loop to print scholarships in little boxes -->
+      {% for s in scholarships_list %}
+        <div class="scholarship">
+              <b>Scholarship: {{s.name}}</b>
+              <b>Amount: ${{s.amount}}</b>
+              <b>Date: {{date_closed}}</b>
+        </div>
+      {% endfor %} <!--Loop ends-->
     </div>
-  </body>
 
+  </body>
 </html>
