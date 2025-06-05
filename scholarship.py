@@ -1,7 +1,15 @@
 from flask import Flask, render_template, request, redirect
 
+# Flask acts as our "back-end", storing data and login information 
 """TO DO LIST"""
-# TODO: Turn tables into little div cards
+# TODO: Do we need to use elif statements for the 5+ mark?
+# TODO:Add a login feature
+# TODO: Implement slicing or indexing
+# TODO: Add 3 other methods to the scholarship class
+# Add one other of the 5 following for the mark
+# TODO: Add CSS and pretty it up
+# TODO: Make helpfull meaningfull comments
+# TODO: Add extra features if I want
 
 app = Flask(__name__)
 
@@ -32,7 +40,7 @@ def add_scholarship():
     if request.method == "POST":
         name = str(request.form["name"])
         amount = float(request.form["amount"])
-        due_date = request.form["due_date"]
+        due_date = str(request.form["due_date"])
 
         scholarship_object = Scholarships(
             name = name,
