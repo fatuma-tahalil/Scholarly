@@ -30,3 +30,8 @@ body {
   border:2px solid black;
   width:500px;
 }
+
+.scholarship_box .scholarship #edit{
+ position: absolute;
+ align-self:flex-end;
+}

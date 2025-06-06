@@ -10,19 +10,37 @@
     <!-- 1. Enter Scholarship-->
     <form action="/" class="enter_scholarship" method="POST">
       <!-- The names allow Flask to identify what user input we want to save-->
-      <p>Name: <input type="text" name="name" /></p>
-      <p>Amount: <input type="number" name="amount" /></p>
-      <p>Due Date: <input type="date" name="due_date" /></p>
-      <p><input type="submit" value="submit" /></p>
+      <p>Name: <input type="text" name="name" autocomplete="off" required/></p>
+      <p>Amount: <input type="number" name="amount" autocomplete="off" required/></p>
+      <p>Due Date: <input type="date" name="due_date" autocomplete="off" required/></p>
+      <p><input type="submit" value="submit"/></p>
     </form>
 
+    <!-- The box that holds all the scholarships that are printed-->
+     <!-- TODO: Determine if this box is necessary-->
     <div class="scholarship_box">
       <!--  Basically a for loop to print scholarships in little boxes -->
       {% for s in scholarships_list %}
         <div class="scholarship">
+          <!-- The scholarship that has been selected to be edited now enters editing mode -->
+          {% if scholarship_name == s.name %}
+            <form action="/edit" method="POST">
+                  <p>Name: <input type="text" name="scholarship_name" autocomplete="off" required/></p>
+                  <p>Amount: <input type="number" name="amount" autocomplete="off" required/></p>
+                  <p>Due Date: <input type="date" name="due_date" autocomplete="off" required/></p>
+                  <p><input type="submit" value="submit"/></p>
+          {%else%}
               <b>Scholarship: {{s.name}}</b>
               <b>Amount: ${{s.amount}}</b>
               <b>Date: {{s.date_closed}}</b>
+              <form action="/get_name" method="POST" id="edit">
+                <!-- Edit box to change the scholarship details -->
+                <!-- A hidden input is used so we know WHICH scholarship to edit-->
+                <!-- That is because we used unique names to identify each scholarship-->
+                <input type="hidden" name="scholarship_name" value="{{s.name}}">
+                <input type="image" src="{{url_for('static', filename='images/edit.svg')}}" alt="edit"/>
+              </form>
+            {% endif %}
         </div>
       {% endfor %} <!--Loop ends-->
     </div>
