@@ -95,11 +95,13 @@ def get_scholarship_name():
             scholarship_name = scholarship_name 
         )
 
-# Changes the div to be an input form
+# Takes in the information from the changed form
 @app.route("/edit", methods=["GET", "POST"])
 def update_scholarship():
     global scholarship_name
-
+    name = str(request.form["new_name"])
+    amount = float(request.form["new_amount"])
+    due_date = str(request.form["new_due_date"])
 
 # Allows for automatic updates on the flask browser while debugging
 if __name__ == "__main__":

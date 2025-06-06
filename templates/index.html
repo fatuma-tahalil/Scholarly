@@ -25,9 +25,9 @@
           <!-- The scholarship that has been selected to be edited now enters editing mode -->
           {% if scholarship_name == s.name %}
             <form action="/edit" method="POST">
-                  <p>Name: <input type="text" name="scholarship_name" autocomplete="off" required/></p>
-                  <p>Amount: <input type="number" name="amount" autocomplete="off" required/></p>
-                  <p>Due Date: <input type="date" name="due_date" autocomplete="off" required/></p>
+                  <p>Name: <input type="text" name="new_name" autocomplete="off" required/></p>
+                  <p>Amount: <input type="number" name="new_amount" autocomplete="off" required/></p>
+                  <p>Due Date: <input type="date" name="new_due_date" autocomplete="off" required/></p>
                   <p><input type="submit" value="submit"/></p>
           {%else%}
               <b>Scholarship: {{s.name}}</b>
