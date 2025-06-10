@@ -2,6 +2,8 @@
 Ditch the spreadsheets! Scholarly helps you stay organized with a clean interface, reliable reminders, and helpful resources — 
 So you're always ready to secure that scholarship!
 
+**Link:** https://scholarly-18l0.onrender.com/
+
 Features✨
 - Scholarship tracking
 - Coming Soon: Reminders for due dates
