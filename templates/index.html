@@ -23,13 +23,14 @@
       {% for s in scholarships_list %}
         <div class="scholarship">
           <!-- The scholarship that has been selected to be edited now enters editing mode -->
-          {% if scholarship_name == s.name %}
+          {% if edit_scholarship_name == s.name %}
             <form action="/edit" method="POST">
-                  <p>Name: <input type="text" name="new_name" autocomplete="off" required/></p>
-                  <p>Amount: <input type="number" name="new_amount" autocomplete="off" required/></p>
-                  <p>Due Date: <input type="date" name="new_due_date" autocomplete="off" required/></p>
-                  <p><input type="submit" value="submit"/></p>
-          {%else%}
+              <p>Name: <input type="text" name="new_name" autocomplete="off" required/></p>
+              <p>Amount: <input type="number" name="new_amount" autocomplete="off" required/></p>
+              <p>Due Date: <input type="date" name="new_due_date" autocomplete="off" required/></p>
+              <p><input type="submit" value="submit"/></p>
+            </form>
+          {%else%} 
               <b>Scholarship: {{s.name}}</b>
               <b>Amount: ${{s.amount}}</b>
               <b>Date: {{s.date_closed}}</b>
@@ -37,13 +38,12 @@
                 <!-- Edit box to change the scholarship details -->
                 <!-- A hidden input is used so we know WHICH scholarship to edit-->
                 <!-- That is because we used unique names to identify each scholarship-->
-                <input type="hidden" name="scholarship_name" value="{{s.name}}">
+                <input type="hidden" name="edit_scholarship_name" value="{{s.name}}">
                 <input type="image" src="{{url_for('static', filename='images/edit.svg')}}" alt="edit"/>
               </form>
             {% endif %}
         </div>
       {% endfor %} <!--Loop ends-->
     </div>
-
   </body>
 </html>
