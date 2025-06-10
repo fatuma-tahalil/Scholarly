@@ -3,7 +3,6 @@ from flask import Flask, render_template, request, redirect
 # Flask acts as our "back-end", storing data and login information 
 """TO DO LIST"""
 # TODO:Add a login feature
-# TODO: Implement slicing or indexing
 # TODO: Add 3 other methods to the scholarship class
 # TODO: Add one other of the 5 following for the mark
 # TODO: Add CSS and pretty it up
@@ -11,7 +10,6 @@ from flask import Flask, render_template, request, redirect
 # TODO: Add extra features if I want
 
 """Functionality Goals"""
-# Add the ability to edit scholarships
 # Add the ability to mark scholarships as complete
 # Add a nav bar to toggle sign out, finished scholarships and resources
 # Create the seperate html page to display finished scholarships
@@ -21,13 +19,14 @@ app = Flask(__name__)
 
 # These global variables are necessary because functions 
 # that control routes CAN'T have parameters
-scholarship_list = [] # Holds all of our scholarship objects in the order they were inputted
 num = 0 # Helps in creating a unique ID for the scholarship
-edit_scholarship_name = '' # The name of the scholarship we are trying to edit
+scholarship_list = [] # Holds all of our scholarship objects in the order they were inputted
+edit_scholarship_id = '' # The unique identifier of the scholarship we are trying to edit
+
 
 class Scholarships:
-    def __init__(self, identifier, name, amount, date_closed, category, date_open, link, priority, difficulty, notes):
-        self.id = identifier
+    def __init__(self, ident, name, amount, date_closed, category, date_open, link, priority, difficulty, notes):
+        self.id = ident
         self.name = name
         self.amount = amount
         self.date_closed = date_closed
@@ -44,8 +43,6 @@ class Scholarships:
         self.amount = new_amount
         self.date = new_date
 
-
-# Creates a unique identifier for each scholarship
 def create_identifier():
     global num
     num+=1
@@ -65,7 +62,7 @@ def add_scholarship():
         unique_identifier = create_identifier()
 
         scholarship_object = Scholarships(
-            identifier = unique_identifier,
+            ident = unique_identifier,
             name = name,
             amount = amount,
             date_closed = due_date,
@@ -84,42 +81,48 @@ def add_scholarship():
     # Updating the html file with the scholarship list
     return render_template("index.html", scholarships_list = scholarship_list)
 
-# Stores the unqiue name of the scholarship being eddited
+# Stores the memory at which this scholarship we want to edit is stored 
+# We use this strategy because it is how we can identify the scholarship in the list
+
 @app.route("/get_name", methods=["GET", "POST"])
-def get_edit_scholarship_name():
+def get_scholarship():
     global scholarship_list
-    global edit_scholarship_name
+    global edit_scholarship_id
+
     if request.method == "POST":
-        # Stores the name of the scholarship
-        # This tells update_scholarship which scholarship box to allow editing in
-        edit_scholarship_name = request.form["edit_scholarship_name"]
+        # This tells update_scholarship function which scholarship box to allow editing in
+        # Each scholarship box has a unique id to identify them by
+        edit_scholarship_id = request.form["edit_scholarship_id"]
+
         # The HTML is then updated to become a form
-        # TODO: Ensure only specific scholarship become a form
         return render_template(
             "index.html", 
             scholarships_list = scholarship_list,
-            edit_scholarship_name = edit_scholarship_name 
+            edit_scholarship_id = edit_scholarship_id
         )
 
 # Takes in the information from the changed form
 @app.route("/edit", methods=["GET", "POST"])
 def update_scholarship():
-    global edit_scholarship_name
+    global edit_scholarship_id
     global scholarship_list
+
     name = str(request.form["new_name"])
     amount = float(request.form["new_amount"])
     due_date = str(request.form["new_due_date"])
 
-    scholarship_index = scholarship_list.index(edit_scholarship_name) # Finds the index that the
-    print(scholarship_index)
-    Scholarships.update_scholarship_object(scholarship_index, name, amount, due_date)
-    # We change the attributes of the scholarship
+    # Finds the index that the object belongs to
+    # The id of each scholarships last character tells the position it is in the list
+    # We subtract it by one because lists start from 0 but counting starts at 1
+    schol_index = int(edit_scholarship_id[-1])-1
+
+    # Updates the scholarship with the changes we want 
     for scholarships in scholarship_list:
         # If this scholarship is the one we want to edit
-        if scholarships.name == edit_scholarship_name:
+        if scholarships.id == edit_scholarship_id:
             # We edit the attributes of this object with the new ones
-            scholarships.update(name, amount, due_date)
-            edit_scholarship_name = '' # Empty this variable because we "edited" the scholarship
+            scholarship_list[schol_index].update(name, amount, due_date)
+            edit_scholarship_id = '' # Empty this variable because we "edited" the scholarship
             break # We no longer need to loop through the list
     return redirect("/")
 
