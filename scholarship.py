@@ -2,12 +2,10 @@ from flask import Flask, render_template, request, redirect
 
 # Flask acts as our "back-end", storing data and login information 
 """TO DO LIST"""
-# TODO:Add a login feature
 # TODO: Add 3 other methods to the scholarship class
-# TODO: Add one other of the 5 following for the mark
 # TODO: Add CSS and pretty it up
 # TODO: Make helpfull meaningfull comments
-# TODO: Add extra features if I want
+# TODO:Add a login feature that saves users scholarship information
 
 """Functionality Goals"""
 # Add the ability to mark scholarships as complete
@@ -25,8 +23,8 @@ edit_scholarship_id = '' # The unique identifier of the scholarship we are tryin
 
 
 class Scholarships:
-    def __init__(self, ident, name, amount, date_closed, category, date_open, link, priority, difficulty, notes):
-        self.id = ident
+    def __init__(self, identification, name, amount, date_closed, category, date_open, link, priority, difficulty, notes):
+        self.id = identification
         self.name = name
         self.amount = amount
         self.date_closed = date_closed
@@ -43,6 +41,14 @@ class Scholarships:
         self.amount = new_amount
         self.date = new_date
 
+    """
+    def mark_completed(self):
+        self.completed = True
+
+    def is_due_soon(self):
+    
+    """
+    
 def create_identifier():
     global num
     num+=1
@@ -62,7 +68,7 @@ def add_scholarship():
         unique_identifier = create_identifier()
 
         scholarship_object = Scholarships(
-            ident = unique_identifier,
+            identification = unique_identifier,
             name = name,
             amount = amount,
             date_closed = due_date,
@@ -114,14 +120,14 @@ def update_scholarship():
     # Finds the index that the object belongs to
     # The id of each scholarships last character tells the position it is in the list
     # We subtract it by one because lists start from 0 but counting starts at 1
-    schol_index = int(edit_scholarship_id[-1])-1
+    scholarship_index = int(edit_scholarship_id[-1])-1
 
     # Updates the scholarship with the changes we want 
     for scholarships in scholarship_list:
         # If this scholarship is the one we want to edit
         if scholarships.id == edit_scholarship_id:
             # We edit the attributes of this object with the new ones
-            scholarship_list[schol_index].update(name, amount, due_date)
+            scholarship_list[scholarship_index].update(name, amount, due_date)
             edit_scholarship_id = '' # Empty this variable because we "edited" the scholarship
             break # We no longer need to loop through the list
     return redirect("/")
