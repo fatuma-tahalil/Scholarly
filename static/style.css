@@ -15,7 +15,6 @@ body {
   flex-direction: column;
   align-items: center;
   column-gap: 30px;
-  border: 10px;
 }
 
 .scholarship_box{
@@ -24,6 +23,7 @@ body {
   gap: 5px;
 }
 .scholarship_box .scholarship{
+  position:relative;
   display:flex;
   flex-direction: column;
   align-items: center;
@@ -33,8 +33,19 @@ body {
   border:2px solid black;
   width:500px;
 }
+.action_buttons {
+  position: absolute;
+  top:10px;
+  right:10px;
+  display:flex;
+  flex-direction: column;
+}
 
-.scholarship_box .scholarship #edit{
- position: absolute;
- align-self:flex-end;
+.scholarship_box .scholarship #edit, #finished{
+  margin:0;
+  padding:0;
+}
+
+#hidden{
+  display:none;
 }

@@ -19,10 +19,10 @@
     <!-- The box that holds all the scholarships that are printed-->
     <div class="scholarship_box">
       <!--  Basically a for loop to print scholarships in little boxes -->
-      {% for s in scholarships_list %}
-        <div class="scholarship">
+      {% for s in scholarship_list %}
+        <div class="scholarship" id="{% if s.completed %}hidden{%endif%}">
           <!-- The scholarship that has been selected to be edited now enters editing mode -->
-          {% if edit_scholarship_id == s.id%}
+          {% if edit_scholarship_id == s.id %}
             <form action="/edit" method="POST">
               <p>Name: <input type="text" name="new_name" autocomplete="off" required/></p>
               <p>Amount: <input type="number" name="new_amount" autocomplete="off" required/></p>
@@ -33,18 +33,25 @@
               <b>Scholarship: {{s.name}}</b>
               <b>Amount: ${{s.amount}}</b>
               <b>Date: {{s.date_closed}}</b>
-              <form action="/get_name" method="POST" id="edit">
-                
-                <!-- We return the unique identifier of the scholarship-->
-                <input type="image" src="{{url_for('static', filename='images/edit.svg')}}" alt="edit"/>
-                <input type="hidden" name="edit_scholarship_id" value="{{s.id}}">
-              </form>
+
+              <div class="action_buttons">
+                <form action="/get_name" method="POST" id="edit">
+                  <!-- We return the unique identifier of the scholarship-->
+                  <input type="image" src="{{url_for('static', filename='images/edit.svg')}}" alt="edit"/>
+                  <input type="hidden" name="edit_scholarship_id" value="{{s.id}}">
+                </form>
+                <form action="/is_finished" method="POST" id="finished">
+                  <!-- Checks the name of the scholarship that is finished -->
+                  <input type="image" src="{{url_for('static', filename='images/checkmark.svg')}}" alt="finished"/>
+                  <input type="hidden" name="completed_scholarship_id" value="{{s.id}}">
+                </form>
+              </div>
             {% endif %}
         </div>
       {% endfor %} <!--Loop ends-->
     </div>
-    <div class="medium_space">
+    
+    <div class="medium_space"> </div>
 
-    </div>
   </body>
 </html>
