@@ -10,7 +10,7 @@
     <!-- 1. Enter Scholarship-->
     <form action="/" class="enter_scholarship" method="POST">
       <!-- The names allow Flask to identify what user input we want to save-->
-      <p>Name: <input type="text" name="name" autocomplete="off" required/></p>
+      <p>Scholarship Name: <input type="text" name="name" autocomplete="off" required/></p>
       <p>Amount: <input type="number" name="amount" autocomplete="off" required/></p>
       <p>Due Date: <input type="date" name="due_date" autocomplete="off" required/></p>
       <p><input type="submit" value="submit"/></p>
@@ -24,7 +24,7 @@
           <!-- The scholarship that has been selected to be edited now enters editing mode -->
           {% if edit_scholarship_id == s.id %}
             <form action="/edit" method="POST">
-              <p>Name: <input type="text" name="new_name" autocomplete="off" required/></p>
+              <p>Scholarship Name: <input type="text" name="new_name" autocomplete="off" required/></p>
               <p>Amount: <input type="number" name="new_amount" autocomplete="off" required/></p>
               <p>Due Date: <input type="date" name="new_due_date" autocomplete="off" required/></p>
               <p><input type="submit" value="submit"/></p>
