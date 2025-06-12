@@ -7,7 +7,18 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
   </head>
   <body>
-    <!-- 1. Enter Scholarship-->
+    <!--Section 1a: Nav-->
+    <div class="nav">
+      <div class="links">
+        <a href="{{ url_for('print_completed_scholarship') }}">Completed</a>
+        <b class="line">|</b>
+        <a href="{{ url_for('add_scholarship') }}">Scholarships</a>
+        <b class="line">|</b>
+        <a href="">Login</a>
+      </div>
+    </div>
+
+    <!-- Section 2a: Enter Scholarship-->
     <form action="/" class="enter_scholarship" method="POST">
       <!-- The names allow Flask to identify what user input we want to save-->
       <p>Scholarship Name: <input type="text" name="name" autocomplete="off" required/></p>
@@ -16,6 +27,7 @@
       <p><input type="submit" value="submit"/></p>
     </form>
 
+    <!-- Section 3a: Scholarships Listed -->
     <!-- The box that holds all the scholarships that are printed-->
     <div class="scholarship_box">
       <!--  Basically a for loop to print scholarships in little boxes -->

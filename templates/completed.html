@@ -1,1 +1,33 @@
 <!--Where the completed scholarships go-->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Completed Scholarships</title>
+    <meta charset="utf=8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  </head>
+  <body>
+    <!--Section 1a: Nav-->
+    <div class="nav">
+      <div class="links">
+        <a href="{{ url_for('print_completed_scholarship') }}">Completed</a>
+        <b class="line">|</b>
+        <a href="{{ url_for('add_scholarship') }}">Scholarships</a>
+        <b class="line">|</b>
+        <a href="">Login</a>
+      </div>
+    </div>
+
+    <!--Section 2b: Nav-->
+    <div class="scholarship_box">
+        {% for s in completed_scholarship_list%}
+        <div class="scholarship">
+            <b>Scholarship: {{s.name}}</b>
+            <b>Amount: ${{s.amount}}</b>
+            <b>Date: {{s.date_closed}}</b>
+        </div>
+        {% endfor %}
+    </div>
+  </body>

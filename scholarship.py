@@ -145,6 +145,15 @@ def update_scholarship():
     edit_scholarship_id = '' # Empty this variable because we "edited" the scholarship
     return redirect("/")
 
+# Prints out the completed scholarships
+@app.route("/print_completed", methods=["GET", "POST"])
+def print_completed_scholarship():
+    global completed_scholarship_list
+    return render_template(
+    "completed.html", 
+    completed_scholarship_list = completed_scholarship_list,
+    )
+
 # Looks for the scholarship in the list by the ID then returns the object
 def find_scholarship(scholarship_list, scholarship_id):
     for scholarships in scholarship_list:
