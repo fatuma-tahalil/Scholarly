@@ -28,4 +28,4 @@ to the content of this culminating
 - https://www.geeksforgeeks.org/python-introduction-to-web-development-using-flask/
 - https://css-tricks.com/snippets/css/a-guide-to-flexbox/
 - https://www.w3schools.com/python/python_inheritance.asp
-
+- https://www.datacamp.com/tutorial/converting-strings-datetime-objects
