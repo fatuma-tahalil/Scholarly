@@ -21,8 +21,7 @@ to the content of this culminating
 - The ability to learn new frameworks quickly by relating them to past knowledge. I made alot of connections between OOP and Flasks framework.
 - The joy and challenge of making new projects. There is a lot of creativity that went into this project, for example, how I had to take in a submit button
   and identify which scholarship was clicked, and then modify that specific scholarship. There were many ways I could have gone about it, and picking the "best" method was fun.
-  I pondered using an ID, but I needed an input form or it couldnt return the information to the backend. Or I could tag each button with its own name. In the end, I went with a hidden ghost button
-  that became submitted once the edit button was pressed, and this button returned the name of the scholarship.
+  I pondered using the scholarships name but that would be flawed if duplicates were created. So I thought about simply returning the object because I could then use that to locate its position in the list, but that had its own issues. In the end I created an identification attribute that could be used to locate the objects position in the list.
 
 ## Sources Used
 - https://www.geeksforgeeks.org/flask-tutorial/
