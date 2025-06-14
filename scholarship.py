@@ -107,8 +107,7 @@ def add_scholarship():
         )
         # Gives the scholarship object an attribute to state when it's due
         scholarship_object.is_due_soon()
-        print(scholarship_object.reminder)
-        # Adds the scholarship object to our list
+        
         scholarship_list.append(scholarship_object)
         # Tells the browser to make a new GET request
         # Avoids getting duplicate submissions by clearing the entered forms
