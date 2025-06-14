@@ -8,6 +8,9 @@ Features✨
 - Coming Soon: Email reminders for due dates
 - Coming Soon: UI Design and all that make websites bearable to look at
 
+## Demo Video
+
+https://github.com/user-attachments/assets/b37e436f-5780-4443-a119-f402134cb20a
 
 ## Marking
 I would go through the Python file and the HTML file only, as those are the only relevant ones 
