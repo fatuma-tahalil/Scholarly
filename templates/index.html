@@ -44,8 +44,8 @@
           {%else%} 
               <b>Scholarship: {{s.name}}</b>
               <b>Amount: ${{s.amount}}</b>
-              <b>Date: {{s.date_closed}}</b>
-
+              <b>Date: {{s.date_closed[:10]}}</b>
+              {% if s.reminder != None%} <b>{{s.reminder}}</b>{% endif %}
               <div class="action_buttons">
                 <form action="/get_name" method="POST" id="edit">
                   <!-- We return the unique identifier of the scholarship-->

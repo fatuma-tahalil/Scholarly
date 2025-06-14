@@ -6,6 +6,11 @@ body {
   margin: 0;
   min-width: 300px;
 }
+
+.nav{
+  height:50px;
+  background-color: rgb(200, 196, 196);
+}
 .medium_space {
   height: 60px;
 }

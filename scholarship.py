@@ -1,16 +1,13 @@
-from flask import Flask, render_template, request, redirect
 
 # Flask acts as our "back-end", storing data and login information 
+from flask import Flask, render_template, request, redirect
+from datetime import datetime, date
+
 """TO DO LIST"""
 # TODO: Add 3 other methods to the scholarship class
 # TODO: Add CSS and pretty it up
 # TODO: Make helpfull meaningfull comments
 # TODO:Add a login feature that saves users scholarship information
-
-"""Functionality Goals"""
-# Add the ability to mark scholarships as complete
-# Add a nav bar to toggle sign out, finished scholarships and resources
-# Create the seperate html page to display finished scholarships
 
 
 app = Flask(__name__)
@@ -22,14 +19,14 @@ scholarship_list = [] # Holds all of our scholarship objects in the order they w
 edit_scholarship_id = '' # The unique identifier of the scholarship we are trying to edit
 completed_scholarship_list = [] # The list of scholarships that have been completed
 
-
 class Scholarships:
-    def __init__(self, identification, is_completed, name, amount, date_closed, category, date_open, link, priority, difficulty, notes):
+    def __init__(self, identification, is_completed, name, amount, date_closed, date_reminder, category, date_open, link, priority, difficulty, notes):
         self.id = identification
         self.completed = is_completed
         self.name = name
         self.amount = amount
         self.date_closed = date_closed
+        self.reminder = date_reminder
         self.category = category
         self.date_open = date_open
         self.link = link
@@ -41,16 +38,45 @@ class Scholarships:
     def update(self, new_name, new_amount, new_date):
         self.name = new_name
         self.amount = new_amount
-        self.date = new_date
+        self.date_closed = new_date
+
 
     # Method that updates if the scholarship is completed or not
     def mark_completed(self):
         self.completed = True
         
-    """
     def is_due_soon(self):
-    """  
-    
+        todays_date = date.today()
+        due_date = self.date_closed
+        print("TODAYS DATE:", todays_date)
+        print("DUE DATE:", due_date)
+
+        due_date = datetime.strptime(due_date, "%Y-%m-%d").date()
+
+        if todays_date > due_date:
+            self.reminder = "OVERDUE"
+            print(self.reminder)
+        elif todays_date == due_date:
+            self.reminder = "DUE TODAY" # Changes the reminder attribute to a string we print on the div
+            print(self.reminder)
+        else:
+            self.reminder = None # We preeptively set the reminder to be None meaning the difference is greater than 7
+
+            difference = str(due_date - todays_date)
+            # This for loop turns the difference string 
+            # into just an integer of the number of days between each dates
+            print(difference)
+            for i in range(len(difference)):
+                if difference[i] == " ":
+                    difference = difference[:i]
+                    break
+            # Notifies the user that this scholarship is nearly due
+            if int(difference)<=7:
+                return_string = "DUE IN: " + str(difference) + " days"
+                self.reminder = return_string # Changes the reminder attribute to a string we print on the div
+                
+
+
 def create_identifier():
     global num
     num+=1
@@ -60,6 +86,7 @@ def create_identifier():
 @app.route("/", methods=["GET", "POST"])
 def add_scholarship():
     global scholarship_list
+    global date_reminder
     # Checks if information from the html form was sent to browser
     # In flask this method is called post
     if request.method == "POST":
@@ -75,6 +102,7 @@ def add_scholarship():
             name = name,
             amount = amount,
             date_closed = due_date,
+            date_reminder = None,
             category="",
             date_open="",
             link="",
@@ -82,13 +110,18 @@ def add_scholarship():
             difficulty="",
             notes=""
         )
+        # Gives the scholarship object an attribute to state when it's due
+        scholarship_object.is_due_soon()
+        print(scholarship_object.reminder)
         # Adds the scholarship object to our list
         scholarship_list.append(scholarship_object)
         # Tells the browser to make a new GET request
         # Avoids getting duplicate submissions by clearing the entered forms
         return redirect("/")
     # Updating the html file with the scholarship list
-    return render_template("index.html", scholarship_list = scholarship_list)
+    return render_template("index.html", 
+        scholarship_list = scholarship_list
+    )
 
 # Stores the name of the scholarships ID that is finished. 
 # Prevents it from being in the beginning list
@@ -126,8 +159,8 @@ def get_scholarship():
             edit_scholarship_id = edit_scholarship_id
         )
 
-
 # Takes in the information from the changed form
+# Updates the form with the given information
 @app.route("/edit", methods=["GET", "POST"])
 def update_scholarship():
     global edit_scholarship_id
@@ -141,7 +174,11 @@ def update_scholarship():
     # The id of each scholarships last character tells the position it is in the list
     # We subtract it by one because lists start from 0 but counting starts at 1
     scholarship_index = int(edit_scholarship_id[-1])-1
-    scholarship_list[scholarship_index].update(name, amount, due_date)
+    scholarship = scholarship_list[scholarship_index]
+
+    scholarship.update(name, amount, due_date)
+    scholarship.is_due_soon()
+    print(scholarship.reminder)
     edit_scholarship_id = '' # Empty this variable because we "edited" the scholarship
     return redirect("/")
 
