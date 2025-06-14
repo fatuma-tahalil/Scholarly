@@ -8,7 +8,7 @@ from datetime import datetime, date
 # TODO: Add CSS and pretty it up
 # TODO: Make helpfull meaningfull comments
 # TODO:Add a login feature that saves users scholarship information
-
+# Wakatime testing
 
 app = Flask(__name__)
 
