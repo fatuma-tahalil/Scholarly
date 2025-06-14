@@ -5,23 +5,15 @@ So you're always ready to secure that scholarship!
 **Link:** https://scholarly-18l0.onrender.com/
 
 Features✨
-- Scholarship tracking
-- Coming Soon: Reminders for due dates
-- Coming Soon: Resources for writing scholarships
+- Coming Soon: Email reminders for due dates
+- Coming Soon: UI Design and all that make websites bearable to look at
 
 
 ## Marking
 I would go through the Python file and the HTML file only, as those are the only relevant ones 
-to the content of this culminating
+to the content of this culminating.
 
-## What I learned
-- Decorators are heavily used throughout all of programming in both Java and Python
-- A stronger understanding of OOP programming by creating my own custom class, not inherited from a library
-- All attributes of my object were created by me and I had never done that before
-- The ability to learn new frameworks quickly by relating them to past knowledge. I made alot of connections between OOP and Flasks framework.
-- The joy and challenge of making new projects. There is a lot of creativity that went into this project, for example, how I had to take in a submit button
-  and identify which scholarship was clicked, and then modify that specific scholarship. There were many ways I could have gone about it, and picking the "best" method was fun.
-  I pondered using the scholarships name but that would be flawed if duplicates were created. So I thought about simply returning the object because I could then use that to locate its position in the list, but that had its own issues. In the end I created an identification attribute that could be used to locate the objects position in the list.
+![there-was-an-attempt-gif](https://github.com/user-attachments/assets/f5c841ea-930e-46b7-90f3-9a1ba18bfc65)
 
 ## Sources Used
 - https://www.geeksforgeeks.org/flask-tutorial/
