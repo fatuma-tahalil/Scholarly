@@ -40,6 +40,7 @@ class Scholarships:
         self.amount = new_amount
         self.date_closed = new_date
 
+        self.is_due_soon()
 
     # Method that updates if the scholarship is completed or not
     def mark_completed(self):
@@ -48,24 +49,18 @@ class Scholarships:
     def is_due_soon(self):
         todays_date = date.today()
         due_date = self.date_closed
-        print("TODAYS DATE:", todays_date)
-        print("DUE DATE:", due_date)
-
         due_date = datetime.strptime(due_date, "%Y-%m-%d").date()
 
         if todays_date > due_date:
             self.reminder = "OVERDUE"
-            print(self.reminder)
         elif todays_date == due_date:
             self.reminder = "DUE TODAY" # Changes the reminder attribute to a string we print on the div
-            print(self.reminder)
         else:
             self.reminder = None # We preeptively set the reminder to be None meaning the difference is greater than 7
 
             difference = str(due_date - todays_date)
             # This for loop turns the difference string 
             # into just an integer of the number of days between each dates
-            print(difference)
             for i in range(len(difference)):
                 if difference[i] == " ":
                     difference = difference[:i]
@@ -177,8 +172,6 @@ def update_scholarship():
     scholarship = scholarship_list[scholarship_index]
 
     scholarship.update(name, amount, due_date)
-    scholarship.is_due_soon()
-    print(scholarship.reminder)
     edit_scholarship_id = '' # Empty this variable because we "edited" the scholarship
     return redirect("/")
 
