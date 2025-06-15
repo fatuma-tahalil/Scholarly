@@ -8,15 +8,14 @@
   </head>
   <body>
     <!--Section 1a: Nav-->
-    <div class="nav">
-      <div class="links">
-        <a href="{{ url_for('print_completed_scholarship') }}">Completed</a>
-        <b class="line">|</b>
-        <a href="{{ url_for('add_scholarship') }}">Scholarships</a>
-        <b class="line">|</b>
-        <a href="">Login</a>
-      </div>
-    </div>
+    <nav class="navbar">
+      <div class="nav-logo">Scholarship Tracker</div>
+      <ul class="nav-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="/print_completed">Completed</a></li>
+        <!-- Add more links as needed -->
+      </ul>
+    </nav>
 
     <!-- Section 2a: Enter Scholarship-->
     <form action="/" class="enter_scholarship" method="POST">

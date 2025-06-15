@@ -6,7 +6,7 @@ from datetime import datetime, date
 """TO DO LIST"""
 # TODO: Add 3 other methods to the scholarship class
 # TODO: Add CSS and pretty it up
-# TODO: Make helpfull meaningfull comments
+# TODO: Make helpfull meaningfull commenssts
 # TODO:Add a login feature that saves users scholarship information
 # Wakatime testing
 
@@ -56,7 +56,7 @@ class Scholarships:
         elif todays_date == due_date:
             self.reminder = "DUE TODAY" # Changes the reminder attribute to a string we print on the div
         else:
-            self.reminder = None # We preeptively set the reminder to be None meaning the difference is greater than 7
+            self.reminder = None # We preemptively set the reminder to be None meaning the difference is greater than 7
 
             difference = str(due_date - todays_date)
             # This for loop turns the difference string 
